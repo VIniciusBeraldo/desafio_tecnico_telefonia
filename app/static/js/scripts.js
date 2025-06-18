@@ -9,7 +9,7 @@ const thresholdInput = document.getElementById('threshold_input')
 
 socket.on('connect', () => {
     wsSidInput.value = socket.id; // Guarda o ID da sessão WebSocket no campo oculto.
-    atualizarStatusServidor('Conectado ao servidor!', 'info'); 
+    atualizarStatusServidor('Conectado ao servidor', 'info'); 
 });
 
 function atualizarStatusServidor(msg, type='info') {  // função destinada a aterar o status do servidor.
