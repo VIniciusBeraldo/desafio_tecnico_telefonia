@@ -94,7 +94,7 @@ Instalar todas as dependencias necessarias para rodar o projeto.
 
 ### Parte 5: Iniciar a aplicação
 
-1. **Certificar que o redis está ativo com o comando <redis-cli ping> no ubunto e então navegar para pasta app e iniciar o arquivo app.py, conforme o comando abaixo.**
+1. **Certificar que o redis está ativo com o comando (redis-cli ping) no ubunto e então navegar para pasta app e iniciar o arquivo app.py, conforme o comando abaixo.**
     ```bash
     python app.py
     ```
