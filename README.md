@@ -77,7 +77,9 @@ O Redis será usado como uma fila de mensagens para a comunicação entre o seu 
 Após configurar o ambiente do redis, podemos clonar o projeto desejado para sua maquina e baixar as dependencias do python.
 
 1. **Abrir o cmd e navegar ate o repositorio desejado na sua maquina e digitar o comando:**
+    ```bash
     git clone https://github.com/VIniciusBeraldo/desafio_tecnico_telefonia.git
+    ```
     * Feito isso devera dar inicio ao clone do projeto para o reposiorio desejado.
 
 ### Parte 4: Instalando as dependencias do python
@@ -85,5 +87,18 @@ Após configurar o ambiente do redis, podemos clonar o projeto desejado para sua
 Instalar todas as dependencias necessarias para rodar o projeto.
 
 1. **Ainda no diretorio em que foi feito o clone do projeto, deveera utilizaar o seguinte comando abaixo para instalar as dependencias:**
+    ```bash
     pip install -r requirements.txt
+    ```
     * Vai ser dado o inicio dos downloads das depencias necessarias para o projeto.
+
+### Parte 5: Iniciar a aplicação
+
+1. **Navegar até a pasta do projeto e iniciar o arquivo app.py, conforme o comando abaixo**
+    ```bash
+    python app.py
+    ```
+    * Ou
+    ```bash
+    python <CAMINHO COMPLETO ATÉ O ARQUIVO APP.PY>
+    ```
