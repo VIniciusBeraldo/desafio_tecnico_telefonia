@@ -103,3 +103,4 @@ Instalar todas as dependencias necessarias para rodar o projeto.
     python <CAMINHO COMPLETO ATÉ O ARQUIVO APP.PY>
     Ex: python C:\\Users\\vberaldo\\Documents\\desafio_tecnico_telefonia\\app\\app.py
     ```
+2. **Após iniciar a aplicação deverá clicar na url http://127.0.0.1:5000, que se encontra no terminal de comando para acessar a aplicação.**
