@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detecção de Template em Vídeo</title>
     <link rel="stylesheet" href="../static/css/style.css">
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 </head>
 
 <body>
     <h1>Detecção de Template em vídeo</h1>
 
-    <form action="/uploads" method="post" enctype="multipart/form-data">
+    <form id="upload_form" action="/uploads" method="post" enctype="multipart/form-data">
         <div>
             <label for="uploadVideo">Video:</label>
             <input type="file" id="arquivo_video" name="video" accept="video/*" required>
@@ -28,6 +29,13 @@
         <p>asdasd</p>
     </div>
 
+    <div id="identificador_frames">
+        <h2>Frames encontrados</h2>
+        <ul id="messages">
+        </ul>
+    </div>
+
+    <script src="../static/js/scripts.js"></script>
 </body>
 
 </html>

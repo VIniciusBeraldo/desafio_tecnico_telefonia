@@ -1,6 +1,6 @@
 import os, cv2, threading
 import numpy as np
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
 app = Flask(__name__)
@@ -21,6 +21,8 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+socketio = SocketIO(app, message_queue='redis://localhost:6379/0', cors_allowed_origins="*")
+
 def detectacao_template(video_path, image_path, sid=None):
 
     # Carregar o template
@@ -28,21 +30,21 @@ def detectacao_template(video_path, image_path, sid=None):
 
     # Verificar se o template foi carregado
     if template is None:
-        print(f"Erro: Não foi possível carregar o template em '{image_path}'")
         print("Verifique se o arquivo existe e o caminho está correto.")
-        exit()
+        if sid:
+            socketio.emit('processing_error', {'message': 'Erro ao carregar template.'}, room=sid)
+        return
 
     cap = cv2.VideoCapture(video_path)
 
     # Verificar se o vídeo foi aberto corretamente
     if not cap.isOpened():
-        print(f"Erro: Não foi possível abrir o vídeo em '{video_path}'")
         print("Verifique se o arquivo de vídeo existe, o caminho está correto e se ele não está corrompido.")
-        print("Se estiver usando webcam (0), verifique se ela está conectada e disponível.")
-        exit()
+        if sid:
+            socketio.emit('processing_error', {'message': 'Erro ao abrir vídeo.'}, room=sid)
+        return
 
     frame_count = 0
-
     while True:
         
         ret, frame = cap.read()
@@ -68,6 +70,12 @@ def detectacao_template(video_path, image_path, sid=None):
 
         if num_deteccoes_no_frame > 0:
             print(f"Template detectado no Frame {frame_count}!")
+            if sid: # Se tivermos um SID (ID da sessão WebSocket do cliente)
+                message_data = {
+                    'message': f"Template detectado no Frame {frame_count}!",
+                }
+                socketio.emit('template_found', message_data, room=sid) # Envia a mensagem apenas para este cliente
+                print(f"Evento 'template_found' emitido para SID: {sid} no frame {frame_count}")
 
 # --- Rotas da Aplicação ---
 
@@ -78,6 +86,7 @@ def index():
 
 @app.route('/uploads', methods=['POST'])
 def upload_files():
+    
     if 'video' not in request.files or 'image' not in request.files:
         return 'Nenhum arquivo de vídeo ou imagem enviado', 400
 
@@ -86,6 +95,11 @@ def upload_files():
 
     video_path = None
     image_path = None
+
+    client_ws_sid = request.form.get('ws_sid')
+
+    if not client_ws_sid:
+        print("Aviso: SID do WebSocket não recebido no upload. Mensagens WebSocket não serão enviadas para um cliente específico.")
 
     # Processa o arquivo de vídeo
     if video_file and allowed_file(video_file.filename):
@@ -105,9 +119,9 @@ def upload_files():
         thread = threading.Thread(target=detectacao_template, args=(video_path, image_path))
         thread.start()
 
-        return {"message": "Arquivos recebidos e processamento iniciado em background!"}, 200
+        return jsonify({"message": "Arquivos recebidos e processamento iniciado em background!"}), 200
     else:
         return 'Erro ao salvar um ou ambos os arquivos.', 500
     
 if __name__ == '__main__':
-    app.run(debug=True) # Rode em modo de depuração para facilitar o desenvolvimento
+    socketio.run(app, debug=True, host='0.0.0.0', port=5000)
