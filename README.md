@@ -98,7 +98,8 @@ Instalar todas as dependencias necessarias para rodar o projeto.
     ```bash
     python app.py
     ```
-    * Ou
+    Ou
     ```bash
     python <CAMINHO COMPLETO ATÉ O ARQUIVO APP.PY>
+    Ex: python C:\\Users\\vberaldo\\Documents\\desafio_tecnico_telefonia\\app\\app.py
     ```
