@@ -12,6 +12,10 @@ socket.on('connect', () => {
     atualizarStatusServidor('Conectado ao servidor', 'info'); 
 });
 
+socket.on('disconnect', () => {
+    atualizarStatusServidor('Disconectado ao servidor', 'info'); 
+});
+
 function atualizarStatusServidor(msg, type='info') {  // função destinada a aterar o status do servidor.
     paragrafoStatusServidor.textContent = msg
 }
