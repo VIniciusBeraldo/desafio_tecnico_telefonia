@@ -86,7 +86,7 @@ Após configurar o ambiente do redis, podemos clonar o projeto desejado para sua
 
 Instalar todas as dependencias necessarias para rodar o projeto.
 
-1. **Ainda no diretorio em que foi feito o clone do projeto, deveera utilizaar o seguinte comando abaixo para instalar as dependencias:**
+1. **Após realizar o clone do projeto, devemos navegar para dentro da pasta <desafio_tecnico_telefonia> e realizar o comando abaixo para instalar todas as depencias que se encontra no requirements.txt**
     ```bash
     pip install -r requirements.txt
     ```
