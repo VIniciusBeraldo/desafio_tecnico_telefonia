@@ -1,5 +1,4 @@
 Flask
 Flask-SocketIO
 opencv-python
-eventlet
 redis
