@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detecção de Template em Vídeo</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <h1>Detecção de Template em vídeo</h1>
+
+    <form action="/uploads" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="uploadVideo">Video:</label>
+            <input type="file" id="arquivo_video" name="video" accept="video/*" required>
+        </div>
+        <div>
+            <label for="uploadImagem">Imagem:</label>
+            <input type="file" id="arquivo_template" name="image" accept="image/*" required>
+        </div>
+        <input type="submit" value="Fazer o Upload e Processar">
+    </form>
+
+    <div id="status_processamento">
+        <label for="">sdfsdf:</label>
+        <p>asdasd</p>
+    </div>
+
+</body>
+
+</html>
